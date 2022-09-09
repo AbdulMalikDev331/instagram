@@ -1,0 +1,1 @@
+$('#comment-<%=@comment.id %>').replaceWith('<div id=<%="hide-box-#{@comment.id}"%>><%= form_with model: [@post, @comment]  do |f| %><div class="input-group" ><%= f.text_field :comment, class: 'form-control' %><div class="input-group-append"><%= f.submit "Update", class:'btn btn-warning' %> </div></div><% end %><br></div>');

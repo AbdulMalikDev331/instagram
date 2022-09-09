@@ -1,0 +1,6 @@
+<div class="follow_<%= user.id %>" >
+  <%= form_with model: Request, remote:true do |form| %>
+    <%= hidden_field_tag(:recipient_id, user.id) %>
+    <%= form.submit "Follow #{user.username}", to: :request, class:"btn btn-success" %>
+  <% end %>
+</div>

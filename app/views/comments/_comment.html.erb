@@ -1,0 +1,17 @@
+<div class="mb-4  row" id="comment-<%= comment.id %>">
+  <div class="col-7 lb">
+    <strong class="mr-3 "> <%= comment.user.username%> </strong>
+    <span id = "this_comment_<%= comment.id %>" > <%= comment.comment%></span>
+  </div>
+  <div class="col-5">
+    <span>&nbsp&nbsp&nbsp&nbsp</span>
+    <% if policy(comment).edit?  %>
+      <%= link_to "Edit", edit_post_comment_path(comment.post_id, comment),
+      remote: true, class: 'btn btn-warning px-3'%>
+    <% end %>
+    <% if policy(comment).destroy? %>
+      <%= link_to "Delete", post_comment_path(comment.post_id, comment),
+        method: :delete, remote: true, class: 'btn btn-danger px-3' %>
+    <%end%>
+  </div>
+</div>

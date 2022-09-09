@@ -1,0 +1,28 @@
+<div>
+  <nav
+        class="navbar navbar-expand-sm bg-light mb-5"
+        id="main-nav"
+      >
+    <div class="container">
+      <a href="/user" class="navbar-brand pr-5"
+            ><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+      <form class="form-inline pl-5" action="/search">
+        <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to "Signout", destroy_user_session_path, method: "delete" , class: "btn btn-warning"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "New Post", new_post_path, class: "btn btn-dark ml-2"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "My Profile", user_path(current_user), class: "btn btn-dark ml-2"%>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

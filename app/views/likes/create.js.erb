@@ -1,0 +1,2 @@
+console.log('inside like.create.js.erb')
+$('#like_id-<%=@like.post_id%>').replaceWith('<div id="unlike_id-<%=@like.post_id%>"><%= button_to "Unlike", post_like_path(@like.post_id, @like), remote: true, method: :delete, class:"btn btn-danger mr-2 mt-3 px-4" %></div>');

@@ -1,0 +1,14 @@
+.storythumbnail {
+  /* Gray border */
+  border-radius: 50%;
+  /* Rounded border */
+  padding: 5px;
+  /* Some padding */
+  width: 100px;
+  height: 100px;
+  /* Set a small width */
+}
+
+.border-green {
+  border: 0.5px solid greenyellow;
+}/*# sourceMappingURL=story.css.map */

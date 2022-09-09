@@ -1,0 +1,10 @@
+<div class="comment-box border-bottom pb-5 mt-3" >
+  <%= form_with model: [post, post.comments.build] do |f| %>
+    <div class="input-group" >
+      <%= f.text_field :comment, placeholder: "Add comment here..." , class: "form-control post-comment" %>
+      <div class="input-group-append">
+        <%= f.submit "Comment" , class: "btn btn-warning float-right"%>
+      </div>
+    </div>
+  <% end %>
+</div>

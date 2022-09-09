@@ -1,0 +1,7 @@
+{
+  "name": "mailer-app",
+  "private": true,
+  "dependencies": {
+    "owl.carousel": "^2.3.4"
+  }
+}

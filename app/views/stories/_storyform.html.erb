@@ -1,0 +1,11 @@
+<%= form_with(model: @story) do |f| %>
+  <span class="mr-5">Enter description for the story:</span>
+  <%= f.text_field :description, id:"story-desc"%>
+  <span id="story-desc-err"></span>
+  <p> </p>
+  <span class="mr-5 mb-5 mt-3">Select image for the story: &nbsp &nbsp &nbsp</span>
+  <%= f.file_field :storyimage, :required => 'required', id:"story-img"%>
+  <span id="story-img-err"></span>
+  <p><%= f.submit "Submit Story", id:"Submit-Story" , class:"btn btn-success mt-3"%></p>
+<% end %>
+<%= link_to "back", user_index_path , class: "btn btn-warning mt-5" %>

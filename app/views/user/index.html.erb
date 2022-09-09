@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-3 pt-5 border">
+    <div class="font-weight-bold text-align-left row align-items-center border-bottom pb-3">
+      <p class="col-12">User: </p>
+      <div class="float-left col-6">
+        <% if current_user.profile_pic.attached? %>
+          <%= image_tag current_user.profile_pic,class: "thumbnail mr-3 mt-2 " %>
+        <%end %>
+      </div>
+      <div class="float-right col-6 ">
+        <%= link_to current_user.username, user_path(current_user), class: "font-weight-bold text-dark"  %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <h4 class="text-muted my-4 ml-3 col-12">Pending requests</h4>
+      <%= render partial: 'requests/request', collection: @requests, as: :request%>
+    </div>
+    <div class= "row">
+      <div class="col-12">
+        <%= link_to "Create a new Story", new_story_path, class: "btn btn-danger px-4 mt-5 "%>
+      </div>
+      <div class="col-12">
+        <h3 class= "text-muted mt-5">Stories</h3>
+      </div >
+      <%= render partial:'stories/story', collection: @uniqstory, as: :story%>
+    </div>
+  </div>
+  <div class="col-1"></div>
+  <div class="col-8  justify-content-center ">
+    <%= render partial: "post", collection: @allposts %>
+  </div>
+</div>

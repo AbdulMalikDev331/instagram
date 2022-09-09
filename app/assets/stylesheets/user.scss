@@ -1,0 +1,33 @@
+// Place all the styles related to the User controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.profile_pic{
+  border-radius: 60%;
+  height: 200px;
+  width: 200px;
+
+}
+.thumbnail {
+
+  /* Gray border */
+  border-radius: 50%;
+  /* Rounded border */
+  padding: 5px;
+  /* Some padding */
+  width: 80px;
+  height: 80px;
+  /* Set a small width */
+}
+.images{
+  width: 400px;
+  height: 350px;
+
+}
+.profile_post_images{
+
+  width: 60%;
+  height: 60%;
+}
+.bg-beige{
+  background-color: rgb(242, 241, 241);
+}

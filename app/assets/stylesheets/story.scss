@@ -1,0 +1,17 @@
+// Place all the styles related to the story controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.storythumbnail {
+
+  /* Gray border */
+  border-radius: 50%;
+  /* Rounded border */
+  padding: 5px;
+  /* Some padding */
+  width: 100px;
+  height: 100px;
+  /* Set a small width */
+}
+.border-green{
+  border: 0.5px solid greenyellow
+}

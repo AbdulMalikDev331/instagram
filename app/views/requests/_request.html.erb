@@ -1,0 +1,16 @@
+<% @requests.each do |request|%>
+  <div id="pending-<%=request.id %>" class="row">
+    <% if request.status == "pending"%>
+      <span class="ml-3 col-12"><%= User.find(request.sender_id).username%> </span>
+      <div class="col-6">
+        <%= form_tag request_path(request.sender_id), method: :patch, class: "btn" do %>
+          <%= hidden_field_tag :follow_id, request.sender_id %>
+          <%= submit_tag "Accept", class: "btn btn-success ml-4"%>
+        <%end %>
+      </div>
+      <div class="col-6">
+        <%= link_to "Reject",request_path(request.id) , method: :delete , remote: true, data: { confirm: 'Are you sure?' }, class:"btn btn-danger ml-2 mt-2"%>
+      </div>
+    <%end %>
+  </div>
+<% end %>

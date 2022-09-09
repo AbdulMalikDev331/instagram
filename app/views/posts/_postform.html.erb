@@ -1,0 +1,10 @@
+<%= form_with(model: @post) do |f| %>
+  <span class="mr-5">Enter description for the post:</span>
+  <%= f.text_field :description, :required => 'required', id: "post-desc"%>
+  <span id="post-desc-err"></span>
+  <p> </p>
+  <span class="mr-5">Select images for the post: &nbsp &nbsp &nbsp</span>
+  <%= f.file_field :images , multiple: true ,:required => 'required', accept: 'image/png,image/jpg,image/jpeg', id:"post-img"%>
+  <span id="post-img-err"></span>
+  <%= f.submit "Submit", class:"btn btn-success my-3", id:"post-submit"  %>
+<% end %>

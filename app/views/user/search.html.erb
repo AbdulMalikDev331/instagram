@@ -1,0 +1,16 @@
+<h1>These are the results</h1>
+<div class="card" >
+  <div class="card-body">
+    <% @users.each do |user| %>
+      <%# a check to make sure that current_user doesn't appear in the search %>
+      <% if user.username != current_user.username || user.fullname != current_user.fullname%>
+        <p><%= user.fullname %></p>
+        <h5 class="card-title"><%= user.username %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= user.email %></h6>
+        <p class="card-text"> created <%= time_ago_in_words(user.created_at) %> ago </p>
+        <%= link_to "View Profile", user_path(user.id), class:"btn btn-danger mb-5 "%>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+</div>

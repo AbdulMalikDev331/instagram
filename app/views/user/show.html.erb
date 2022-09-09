@@ -1,0 +1,56 @@
+<div class="row border-bottom pb-5">
+  <div class="col-3 ">
+    <% if @user.profile_pic.attached? %>
+      <%= image_tag @user.profile_pic, class: "profile_pic" %>
+    <%end %>
+  </div>
+  <div class="row col-9  align-items-center">
+    <div class="col-12">
+      <h1 class="font-weight-bold "><%= @user.username%></h1>
+    </div>
+    <div class="col-3">
+      <span> Total Posts &nbsp  &nbsp </span>
+      <%= @user.posts.count "posts"%>
+    </div>
+    <div class="col-2">
+      <span>Followers &nbsp  &nbsp <%= @user.total_following %> </span>
+    </div>
+    <div class="col-2">
+      <span>Following &nbsp  &nbsp <%= @user.total_followers %> </span>
+    </div>
+    <div class="col-2">
+      <% if @user.id == current_user.id %>
+        <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-success " %>
+      <%end%>
+    </div>
+    <% if ((@user.id != current_user.id && !@followers.include?(@user.id) )  || ( @user.id != current_user.id && @followers.size == 0 )) && @user.kind=='public' %>
+      <div class="col-3">
+        <%= form_tag follower_index_path, method: :post, class: "btn" do %>
+          <%= hidden_field_tag :follow_id, @user.id  %>
+          <%= submit_tag "Follow #{@user.username}", class: "btn btn-success"%>
+        <%end %>
+      </div>
+    <% end %>
+    <% if ((@user.id != current_user.id && !@followers.include?(@user.id) )  || ( @user.id != current_user.id && @followers.size == 0 )) && @user.kind=='private'%>
+      <%= render 'user/follow_form', user: @user%>
+    <%end%>
+    <% if @user.id != current_user.id && @followers.include?(@user.id) %>
+      <div class="col-3">
+        <%= form_tag follower_path(@user.id), method: :delete, class: "btn" do %>
+          <%= hidden_field_tag :follow_id, @user.id %>
+          <%= submit_tag "Unfollow #{@user.username}", class: "btn btn-success"%>
+        <%end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<h3 class="d-flex justify-content-center mt-5">Posts</h3>
+<div class="mt-5" >
+  <% if @user.id == current_user.id || @followers.include?(@user.id) || @user.kind == 'public' %>
+    <%= render partial:'show', collection: @user.posts, as: :posts%>
+  <% else %>
+    <div class="d-flex justify-content-center"></div>
+    <h3 class="mt-5 mb-3 d-flex justify-content-center"> Account is private </h3>
+    <p class="lead d-flex justify-content-center">  Follow account to see posts </p>
+  <% end %>
+</div>

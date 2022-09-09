@@ -1,0 +1,2 @@
+console.log('destroy.js.erb')
+$('#unlike_id-<%=@like.post_id%>').replaceWith('<div id="like_id-<%=@like.post_id%>"><%= button_to "Like", post_likes_path(@like.post_id), params: { like: { post_id: @like.post_id}}, remote: true, method: :post, class:"btn btn-success mr-2 mt-3 px-4" %></div>');

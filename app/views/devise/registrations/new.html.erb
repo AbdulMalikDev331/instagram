@@ -1,0 +1,53 @@
+<div class= "container" >
+  <h2 class= "d-flex justify-content-center pt-5">Sign up</h2>
+  <br/>
+  <p class="lead d-flex justify-content-center "> Sign up to see photos and videos from your friends</p>
+  <div class= "d-flex justify-content-center">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field pb-3">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", id: "email-signup" %>
+        <span id= "signup_email_error"></span>
+      </div>
+      <div class="field pb-3">
+        <%= f.label :username %><br />
+        <%= f.text_field :username , class: "form-control", autofocus: true, id:"username-signup"   %>
+        <span id="signup_username_error"></span>
+      </div>
+      <div class="field pb-3">
+        <%= f.label :fullname %><br />
+        <%= f.text_field :fullname,  class: "form-control",  autofocus: true, id:"fullname-signup"%>
+        <span id="signup_fullname_error"></span>
+      </div>
+      <div class="field  pb-3">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id:"password-signup"  %>
+        <span id="signup_password_error"></span>
+      </div>
+      <div class="field pb-3">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id:"password-confirm-signup" %>
+        <span id="signup_confirm_password_error"></span>
+      </div>
+      <p class="card-text " >
+        <span> Add your profile picture <%= f.file_field :profile_pic, accept: 'image/png,image/jpg,image/jpeg' %></span>
+      </p>
+      <p>
+        <b>Account type</b><br />
+        <input id="user_kind_private" name="user[kind]" type="radio" value="private" /> Private<br />
+        <input id="user_kind_public" name="user[kind]" type="radio" value="public" checked="checked" /> Public<br />
+      </p>
+      <div class="pb-2">
+        <%= f.submit "Sign up",class: "actions btn btn-success", class: "form-control btn btn-success", id: "SignUp-btn" %>
+      </div>
+    <% end %>
+  </div>
+  <div class= "d-flex justify-content-center pt-1 ">
+    <p > Already have an account? </p>
+    <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-success ml-1 " %><br />
+  </div>
+</div>

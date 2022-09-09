@@ -1,0 +1,10 @@
+<h3>Edit post</h3>
+<%= render 'postform' %>
+<div class="mt-3">
+  <% if @post.images.attached? %>
+    <div class="row justify-content-center">
+      <%= render 'user/carousel', posts: @post %>
+    <% end %>
+  </div>
+</div>
+<%= link_to "back", user_path(current_user), class: "btn btn-danger my-5" %>
