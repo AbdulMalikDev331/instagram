@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to user_index_path, notice: 'Post created successfully' }
       else
-        flash[:danger] = @post.errors.full_messages
+        flash[:danger] = 'Failed to create the post'
         format.html { redirect_to new_post_path }
       end
     end
