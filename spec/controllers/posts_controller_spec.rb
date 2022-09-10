@@ -5,6 +5,7 @@ RSpec.describe PostsController, type: :controller do
   let(:post1) { create(:post, user: user) }
   let(:current_user) { create(:user) }
   let(:my_post) { create(:post, user: current_user) }
+  before_count = Post.count
 
   before :each do
     sign_in current_user
@@ -41,6 +42,11 @@ RSpec.describe PostsController, type: :controller do
 
         expect(flash[:notice]).to eq('Post created successfully')
       end
+      it 'should increase the post count' do
+        post :create, params: params
+
+        expect(Post.count).not_to eq(before_count)
+      end
       it 'redirects user index page on successful creation of new Post' do
         post :create, params: params
 
@@ -66,6 +72,11 @@ RSpec.describe PostsController, type: :controller do
 
         expect(response).to redirect_to(new_post_path)
       end
+      it 'should not increase the post count' do
+        post :create, params: params
+
+        expect(Post.count).to eq(before_count)
+      end
     end
     context 'when user is not signed in' do
       description = Faker::Lorem.sentence
@@ -81,6 +92,12 @@ RSpec.describe PostsController, type: :controller do
         post :create, params: params
 
         expect(response.status).to eq(302)
+      end
+      it 'should increase the post count' do
+        sign_out current_user
+        post :create, params: params
+
+        expect(Post.count).to eq(before_count)
       end
     end
   end

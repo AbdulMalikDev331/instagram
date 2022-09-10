@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe FollowerController, type: :controller do
   let(:user) { create(:user) }
   let(:current_user) { create(:user) }
+  before_count = Follower.count
 
   before :each do
     sign_in current_user
@@ -21,6 +22,11 @@ RSpec.describe FollowerController, type: :controller do
 
         expect(flash[:success]).to eq('Relation successfully build')
       end
+      it 'should increase the follower count' do
+        post :create, params: params
+
+        expect(Follower.count).not_to eq(before_count)
+      end
       it 'redirects to user profile with successful creation of new relation' do
         post :create, params: params
 
@@ -28,18 +34,40 @@ RSpec.describe FollowerController, type: :controller do
       end
     end
     context 'when invalid params passed' do
+      let(:params) do
+        {
+          follow_id: current_user.id
+        }
+      end
       it 'respond with unsuccessful behaviour' do
-        post :create, params: { follow_id: current_user.id }
+        post :create, params: params
 
         expect(flash[:danger]).to eq('Failed to create relation')
       end
+
+      it 'should not increase the follower count' do
+        post :create, params: params
+
+        expect(Follower.count).to eq(before_count)
+      end
     end
     context 'when user is not signed in' do
+      let(:params) do
+        {
+          follow_id: ''
+        }
+      end
       it 'respond with status user not signin' do
         sign_out current_user
-        post :create, params: { follow_id: '' }, format: :json
+        post :create, params: params, format: :json
 
         expect(response.status).to eq(401)
+      end
+      it 'should not increase the follower count' do
+        sign_out current_user
+        post :create, params: params
+
+        expect(Follower.count).to eq(before_count)
       end
     end
   end
@@ -60,6 +88,11 @@ RSpec.describe FollowerController, type: :controller do
         delete :destroy, params: params
 
         expect(response).to redirect_to(user_path)
+      end
+      it 'should  decrease the follower count' do
+        post :destroy, params: params
+
+        expect(Follower.count).not_to eq(before_count)
       end
     end
     context 'when user is authorized' do
