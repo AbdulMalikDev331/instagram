@@ -34,4 +34,4 @@
 /config/application.yml
 #ignore env file
 .env
-echo coverage
+/coverage
