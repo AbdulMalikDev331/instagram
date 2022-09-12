@@ -104,10 +104,20 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'GET edit' do
     context 'when edit form opened' do
+      let(:params) do
+        {
+          id: my_post.id
+        }
+      end
       it 'User can edit successfully' do
-        get :edit, params: { id: my_post.id }
+        get :edit, params: params
 
         expect(response.status).to eq(200)
+      end
+      it 'User can edit successfully' do
+        get :edit, params: params
+
+        expect(response).to render_template('posts/edit')
       end
     end
     context 'when user is not authorized' do
@@ -115,6 +125,11 @@ RSpec.describe PostsController, type: :controller do
         get :edit, params: { id: post1.id }
 
         expect(response.status).to eq(302)
+      end
+      it 'User can edit unsuccessfull' do
+        get :edit, params: { id: post1.id }
+
+        expect(response).not_to render_template('posts/edit')
       end
     end
     context 'when user is not signed in' do
