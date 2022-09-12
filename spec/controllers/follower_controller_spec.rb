@@ -71,6 +71,7 @@ RSpec.describe FollowerController, type: :controller do
       end
     end
   end
+
   describe 'DELETE destroy' do
     let(:rel) { Follower.create(following_id: user.id, follower_id: current_user.id) }
     context 'when invalid params passed' do
@@ -90,7 +91,7 @@ RSpec.describe FollowerController, type: :controller do
         expect(response).to redirect_to(user_path)
       end
       it 'should  decrease the follower count' do
-        post :destroy, params: params
+        delete :destroy, params: params
 
         expect(Follower.count).not_to eq(before_count)
       end
@@ -99,6 +100,7 @@ RSpec.describe FollowerController, type: :controller do
       let(:params) do
         {
           id: rel.following_id
+
         }
       end
 
@@ -112,11 +114,17 @@ RSpec.describe FollowerController, type: :controller do
 
         expect(response).to redirect_to(user_path)
       end
+      it 'should decrease the follower count' do
+        delete :destroy, params: params
+
+        expect(Follower.count).to eq(before_count)
+      end
     end
 
     context 'when user is not authorized' do
       let(:invalid_user) { create(:user) }
       let(:new_rel) { Follower.create(following_id: user.id, follower_id: invalid_user.id) }
+
       it 'only relation owner can delete the realtion' do
         sign_out current_user
         delete :destroy, params: { id: new_rel.following_id }

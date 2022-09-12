@@ -5,6 +5,7 @@ RSpec.describe Story, type: :model do
     it { should belong_to(:user).class_name('User') }
     it { should have_one_attached(:storyimage) }
   end
+
   describe 'validations' do
     it { should validate_presence_of(:storyimage) }
 

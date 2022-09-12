@@ -3,7 +3,8 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
     fullname { Faker::Name.first_name }
-    username { Faker::Alphanumeric.alpha(number: 15) + (Time.now.day + Time.now.hour + Time.now.min + Time.now.sec).to_s }
+    username { Faker::Alphanumeric.alpha(number: 15) + (Time.zone.now.day + Time.zone.now.hour + Time.zone.now.min + Time.zone.now.sec).to_s }
+
     trait :null_email do
       email { nil }
     end

@@ -93,7 +93,7 @@ RSpec.describe PostsController, type: :controller do
 
         expect(response.status).to eq(302)
       end
-      it 'should increase the post count' do
+      it 'should not increase the post count' do
         sign_out current_user
         post :create, params: params
 
@@ -101,6 +101,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+
   describe 'GET edit' do
     context 'when edit form opened' do
       it 'User can edit successfully' do
@@ -125,6 +126,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+
   describe 'PATCH update' do
     context 'when post update is success' do
       description = Faker::Lorem.sentence
@@ -137,12 +139,12 @@ RSpec.describe PostsController, type: :controller do
           }
         }
       end
-      it 'respond with success if update operation successful' do
+      it 'respond with success' do
         patch :update, params: params
 
         expect(flash[:success]).to eq('Post updated successfully')
       end
-      it 'redirects to user path if update operation successful' do
+      it 'redirects to user path' do
         patch :update, params: params
 
         expect(response).to redirect_to(user_path(current_user))
@@ -204,6 +206,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+
   describe 'DELETE destroy' do
     context 'when post successfully deleted' do
       let(:params) do

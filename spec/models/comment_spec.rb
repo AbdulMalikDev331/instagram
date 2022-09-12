@@ -5,6 +5,7 @@ RSpec.describe Comment, type: :model do
     it { should belong_to(:user).class_name('User') }
     it { should belong_to(:post).class_name('Post') }
   end
+
   describe 'validations' do
     it { should validate_presence_of(:comment) }
     it { should validate_length_of(:comment).is_at_least(3).is_at_most(90) }

@@ -13,11 +13,13 @@ RSpec.describe User, type: :model do
     it { should have_many(:requests_sent).class_name('Request').dependent(:destroy) }
     it { should have_one_attached(:profile_pic) }
   end
+
   describe 'validations' do
     valid_username = Faker::Alphanumeric.alphanumeric(number: 10, min_alpha: 3)
     valid_fullname = Faker::Name.first_name
     invalid_fullname = Faker::Alphanumeric.alphanumeric(number: 10, min_numeric: 3)
     invalid_username = Faker::Lorem.sentence
+
     it { should validate_presence_of(:username) }
     it { should validate_presence_of(:fullname) }
     it { should validate_length_of(:username).is_at_least(2).is_at_most(25) }
@@ -44,7 +46,6 @@ RSpec.describe User, type: :model do
       user = build(:user, :short_password)
       expect(user).not_to be_valid
     end
-
     it 'Image must be of valid type' do
       user = create(:user, :invalid_image)
       expect(user).not_to be_valid
@@ -70,8 +71,10 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
   end
+
   describe 'methods' do
     let(:user) { create(:user) }
+
     it 'finds a searched user by name' do
       @result = User.text_search(user.username)
       expect(@result).to eq([user])
